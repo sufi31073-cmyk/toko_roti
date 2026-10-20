@@ -129,10 +129,10 @@
             <div class="flex items-center justify-between p-2.5 rounded-2xl bg-white border border-rose-100 shadow-sm">
                 <div class="flex items-center space-x-3">
                     <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-rose-400 to-pink-500 text-white flex items-center justify-center font-bold text-sm shadow-sm">
-                        A
+                        {{ strtoupper(substr(Auth::user()->name ?? 'A', 0, 1)) }}
                     </div>
                     <div>
-                        <div class="text-xs font-black text-slate-800">Admin Dea Bakery</div>
+                        <div class="text-xs font-black text-slate-800">{{ Auth::user()->name ?? 'Admin' }}</div>
                         <div class="text-[10px] text-emerald-600 font-semibold flex items-center mt-0.5">
                             <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 mr-1 animate-ping"></span>
                             Online & Siap
@@ -140,6 +140,18 @@
                     </div>
                 </div>
             </div>
+
+            {{-- Logout Button --}}
+            <form method="POST" action="{{ route('admin.logout') }}">
+                @csrf
+                <button type="submit"
+                    class="w-full flex items-center justify-center space-x-2 px-4 py-2.5 rounded-2xl bg-rose-50 hover:bg-rose-100 border border-rose-200 hover:border-rose-300 text-rose-600 hover:text-rose-700 font-bold text-xs transition-all duration-200 group"
+                    onclick="return confirm('Yakin ingin keluar dari panel admin?')"
+                >
+                    <i class="fa-solid fa-arrow-right-from-bracket group-hover:translate-x-0.5 transition-transform"></i>
+                    <span>Keluar dari Admin</span>
+                </button>
+            </form>
 
             <div class="text-center text-[10px] text-rose-400 font-semibold">
                 Dea Bakery System v2.0 • 2026
